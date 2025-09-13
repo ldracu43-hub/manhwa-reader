@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Манхва Читалка</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      padding: 10px;
+      background: #222;
+      position: sticky;
+      top: 0;
+    }
+    img.page {
+      max-width: 100%;
+      height: auto;
+      display: none;
+      margin: 0 auto;
+    }
+    .controls {
+      margin: 15px;
+    }
+    button {
+      background: #444;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Манхва Читалка</h1>
+  </header>
+
+  <div id="reader"></div>
+
+  <div class="controls">
+    <button onclick="prevPage()">⟵ Предыдущая</button>
+    <button onclick="nextPage()">Следующая ⟶</button>
+  </div>
+
+  <script>
+    // 🔹 Сюда добавляй страницы манхвы (ссылки на картинки)
+    const pages = [
+      "images/page1.jpg",
+      "images/page2.jpg",
+      "images/page3.jpg"
+    ];
+
+    let currentPage = 0;
+
+    const reader = document.getElementById("reader");
+
+    pages.forEach((src, i) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.className = "page";
+      if (i === 0) img.style.display = "block";
+      reader.appendChild(img);
+    });
+
+    function showPage(index) {
+      const imgs = document.querySelectorAll(".page");
+      imgs.forEach(img => img.style.display = "none");
+      imgs[index].style.display = "block";
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    }
+  </script>
+</body>
+</html>
